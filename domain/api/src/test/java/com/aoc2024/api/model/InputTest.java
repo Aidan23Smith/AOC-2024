@@ -94,6 +94,63 @@ class InputTest {
     }
 
     @Test
+    void getColumnStrings() {
+        Input underTest = new Input(Set.of(
+            new Coordinate(0, 0, '1'),
+            new Coordinate(1, 0, ' '),
+            new Coordinate(2, 0, '2'),
+            new Coordinate(0, 1, '2'),
+            new Coordinate(1, 1, ' '),
+            new Coordinate(2, 1, '3'),
+            new Coordinate(0, 2, '3'),
+            new Coordinate(1, 2, ' '),
+            new Coordinate(2, 2, '4')
+        ));
+
+        List<String> expected = List.of("123", "234");
+
+        assertEquals(expected, underTest.getColumnStrings(" "));
+    }
+
+    @Test
+    void getColumnValues() {
+        Input underTest = new Input(Set.of(
+            new Coordinate(0, 0, '1'),
+            new Coordinate(1, 0, ' '),
+            new Coordinate(2, 0, '2'),
+            new Coordinate(0, 1, '2'),
+            new Coordinate(1, 1, ' '),
+            new Coordinate(2, 1, '3'),
+            new Coordinate(0, 2, '3'),
+            new Coordinate(1, 2, ' '),
+            new Coordinate(2, 2, '4')
+        ));
+
+        List<List<String>> expected = List.of(List.of("1", "2", "3"), List.of("2", "3", "4"));
+
+        assertEquals(expected, underTest.getColumnValues(" "));
+    }
+
+    @Test
+    void getColumnNumbers() {
+        Input underTest = new Input(Set.of(
+            new Coordinate(0, 0, '1'),
+            new Coordinate(1, 0, ' '),
+            new Coordinate(2, 0, '2'),
+            new Coordinate(0, 1, '2'),
+            new Coordinate(1, 1, ' '),
+            new Coordinate(2, 1, '3'),
+            new Coordinate(0, 2, '3'),
+            new Coordinate(1, 2, ' '),
+            new Coordinate(2, 2, '4')
+        ));
+
+        List<List<Long>> expected = List.of(List.of(1L, 2L, 3L), List.of(2L, 3L, 4L));
+
+        assertEquals(expected, underTest.getColumnNumbers(" "));
+    }
+
+    @Test
     void coordinatesWithCharacter() {
         Set<Coordinate> expected = Set.of(
             new Coordinate(0, 0, 'a'),

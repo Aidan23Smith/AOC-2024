@@ -80,6 +80,30 @@ public class Input {
             .collect(Collectors.toSet());
     }
 
+    public List<String> getColumnStrings(String delimiter) {
+        return getColumnValues(delimiter).stream()
+            .map(column -> column.stream()
+                .reduce("", (a, b) -> a + b))
+            .toList();
+    }
+
+    public List<List<String>> getColumnValues(String delimiter) {
+        List<List<String>> rows = getRowStrings(delimiter);
+        return IntStream.range(0, rows.getFirst().size())
+            .mapToObj(colNumber -> rows.stream()
+                .map(row -> row.get(colNumber))
+                .toList())
+            .toList();
+    }
+
+    public List<List<Long>> getColumnNumbers(String delimiter) {
+        return getColumnValues(delimiter).stream()
+            .map(column -> column.stream()
+                .map(Long::valueOf)
+                .toList())
+            .toList();
+    }
+
     public Set<Coordinate> coordinatesWithCharacter(char character) {
         return coordinates.stream()
             .filter(i -> i.character() == character)

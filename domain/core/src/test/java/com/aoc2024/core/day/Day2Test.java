@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Day2Test extends DayTestBase {
 
-    private final Day2 underTest = new Day2();
+    private static final Day2 underTest = new Day2();
 
     @Override
     Day getUnderTest() {

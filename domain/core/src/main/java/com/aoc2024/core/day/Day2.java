@@ -47,10 +47,10 @@ public class Day2 implements Day {
     }
 
     private boolean compareToNext(List<Long> row, int rowIndex, boolean isIncreasing) {
-        return isIncreasing ?
-               (row.get(rowIndex) < row.get(rowIndex + 1)) :
-               ((row.get(rowIndex) > row.get(rowIndex + 1))
-                && (Math.abs(row.get(rowIndex) - row.get(rowIndex + 1)) <= 3));
+        return (isIncreasing ?
+                (row.get(rowIndex) < row.get(rowIndex + 1)) :
+                (row.get(rowIndex) > row.get(rowIndex + 1)))
+               && (Math.abs(row.get(rowIndex) - row.get(rowIndex + 1)) <= 3);
     }
 
 }
