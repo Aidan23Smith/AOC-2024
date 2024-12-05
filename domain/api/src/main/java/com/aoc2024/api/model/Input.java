@@ -1,5 +1,7 @@
 package com.aoc2024.api.model;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -108,6 +110,12 @@ public class Input {
     public Set<Coordinate> coordinatesWithCharacter(char character) {
         return coordinates.stream()
             .filter(i -> i.character() == character)
+            .collect(Collectors.toSet());
+    }
+
+    public Set<Pair<Integer, Integer>> pairsWithCharacter(char character) {
+        return coordinatesWithCharacter(character).stream()
+            .map(coordinate -> Pair.of(coordinate.x(), coordinate.y()))
             .collect(Collectors.toSet());
     }
 

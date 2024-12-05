@@ -1,5 +1,6 @@
 package com.aoc2024.api.model;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -160,6 +161,13 @@ class InputTest {
         );
 
         assertEquals(expected, underTest.coordinatesWithCharacter('a'));
+    }
+
+    @Test
+    void pairsWithCharacter() {
+        Set<Pair<Integer, Integer>> expected = Set.of(Pair.of(0, 0), Pair.of(2, 1), Pair.of(1, 2));
+
+        assertEquals(expected, underTest.pairsWithCharacter('a'));
     }
 
     @Test
