@@ -2,6 +2,7 @@ package com.aoc2024.api.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -136,6 +137,28 @@ public class Input {
             .filter(coordinate -> coordinate.x() == column)
             .findFirst()
             .orElse(null);
+    }
+
+    public Optional<Coordinate> find(int column, int row) {
+        return coordinates.stream()
+            .filter(coordinate -> coordinate.y() == row)
+            .filter(coordinate -> coordinate.x() == column)
+            .findFirst();
+    }
+
+    public List<Input> splitByBlankRow() {
+        int missingRow = IntStream.range(0, numberOfRows())
+            .filter(rowNum -> find(0, rowNum).isEmpty())
+            .findAny()
+            .orElseThrow();
+        Input before = new Input(coordinates.stream()
+            .filter(coordinate -> coordinate.y() < missingRow)
+            .collect(Collectors.toSet()));
+        Input after = new Input(coordinates.stream()
+                                    .filter(coordinate -> coordinate.y() > missingRow)
+                                    .map(coordinate -> new Coordinate(coordinate.x(), coordinate.y() - missingRow - 1, coordinate.character()))
+                                    .collect(Collectors.toSet()));
+        return List.of(before, after);
     }
 
     public Set<Coordinate> between(int column1, int row1, int column2, int row2) {

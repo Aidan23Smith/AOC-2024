@@ -3,6 +3,7 @@ package com.aoc2024.api.model;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -204,6 +205,12 @@ class InputTest {
     }
 
     @Test
+    void testFind() {
+        Optional<Coordinate> expected = Optional.empty();
+        assertEquals(expected, underTest.find(0, -1));
+    }
+
+    @Test
     void testBetween() {
         Set<Coordinate> expected = Set.of(
             new Coordinate(0, 1, 'b'),
@@ -212,6 +219,28 @@ class InputTest {
             new Coordinate(1, 2, 'a')
         );
         assertEquals(expected, underTest.between(0, 1, 1, 2));
+    }
+
+    @Test
+    void splitByBlankRow() {
+        Input underTest = new Input(Set.of(
+            new Coordinate(0, 0, 'a'),
+            new Coordinate(1, 0, 'b'),
+            new Coordinate(2, 0, 'c'),
+            new Coordinate(0, 2, 'c'),
+            new Coordinate(1, 2, 'a'),
+            new Coordinate(2, 2, 'b')
+        ));
+        List<Input> expected = List.of(
+            new Input(Set.of(new Coordinate(0, 0, 'a'),
+                             new Coordinate(1, 0, 'b'),
+                             new Coordinate(2, 0, 'c'))),
+            new Input(Set.of(new Coordinate(0, 0, 'c'),
+                             new Coordinate(1, 0, 'a'),
+                             new Coordinate(2, 0, 'b')))
+
+        );
+        assertEquals(expected, underTest.splitByBlankRow());
     }
 
 }
