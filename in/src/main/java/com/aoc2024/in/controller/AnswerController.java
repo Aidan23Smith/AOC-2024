@@ -22,11 +22,16 @@ public class AnswerController {
     @GetMapping("answer/{day}/pt/{part}")
     public String getAnswer(@PathVariable int day,
                             @PathVariable int part) throws IOException {
+        long start = System.currentTimeMillis();
+        String answer;
         if (part == 1) {
-            return answerService.getPt1(new AnswerRequest(day, readInputService.getInput(day)));
+            answer = answerService.getPt1(new AnswerRequest(day, readInputService.getInput(day)));
         } else {
-            return answerService.getPt2(new AnswerRequest(day, readInputService.getInput(day)));
+            answer = answerService.getPt2(new AnswerRequest(day, readInputService.getInput(day)));
         }
+        long finish = System.currentTimeMillis();
+        System.out.println("total runtime: "  + (finish - start));
+        return answer;
     }
 
 }
