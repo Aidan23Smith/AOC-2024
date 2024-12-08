@@ -33,16 +33,9 @@ public class Day7Test extends DayTestBase {
     @Override
     String getInputPt2() {
         return """
-            ....#.....
-            .........#
-            ..........
-            ..#.......
-            .......#..
-            ..........
-            .#..^.....
-            ........#.
-            #.........
-            ......#...""";
+           156: 15 6
+           7290: 6 8 6 15
+           192: 17 8 14""";
     }
 
     @Override
@@ -52,7 +45,7 @@ public class Day7Test extends DayTestBase {
 
     @Override
     String expectedPt2() {
-        return "6";
+        return "7638";
     }
 
     @Test
@@ -61,17 +54,6 @@ public class Day7Test extends DayTestBase {
         Input data = TestHelper.convertToInput("1: 1 1 1 1 1 1 1 1 1 1");
 
         assertEquals(expected, underTest.getAnswer1(data));
-    }
-
-    @Test
-    void pt2_samples() {
-        String expected = "7638";
-        Input data = TestHelper.convertToInput("""
-                                                   156: 15 6
-                                                   7290: 6 8 6 15
-                                                   192: 17 8 14""");
-
-        assertEquals(expected, underTest.getAnswer2(data));
     }
 
 }
