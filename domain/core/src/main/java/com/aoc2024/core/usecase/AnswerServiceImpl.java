@@ -9,6 +9,7 @@ import com.aoc2024.core.day.Day3;
 import com.aoc2024.core.day.Day4;
 import com.aoc2024.core.day.Day5;
 import com.aoc2024.core.day.Day6;
+import com.aoc2024.core.day.Day7;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class AnswerServiceImpl implements AnswerService {
     private final Day4 day4;
     private final Day5 day5;
     private final Day6 day6;
+    private final Day7 day7;
 
     @Override
     public String getPt1(AnswerRequest answerRequest) {
@@ -44,6 +46,7 @@ public class AnswerServiceImpl implements AnswerService {
             case 4 -> day4;
             case 5 -> day5;
             case 6 -> day6;
+            case 7 -> day7;
             default -> throw new NotImplementedException();
         };
     }
