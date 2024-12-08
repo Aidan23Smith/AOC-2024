@@ -4,6 +4,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -249,6 +250,40 @@ class InputTest {
 
         );
         assertEquals(expected, underTest.splitByBlankRow());
+    }
+
+    @Test
+    void characterToPairsMap() {
+        Map<Character, Set<Pair<Integer, Integer>>> expected = Map.of(
+            'a', Set.of(
+                Pair.of(0, 0),
+                Pair.of(2, 1),
+                Pair.of(1, 2)
+            ),
+            'b', Set.of(
+                Pair.of(1, 0),
+                Pair.of(0, 1),
+                Pair.of(2, 2)
+            ),
+            'c', Set.of(
+                Pair.of(2, 0),
+                Pair.of(1, 1),
+                Pair.of(0, 2)
+            )
+        );
+        assertEquals(expected, underTest.characterToPairsMap());
+    }
+
+    @Test
+    void characterToPairsMap_ignoring() {
+        Map<Character, Set<Pair<Integer, Integer>>> expected = Map.of(
+            'a', Set.of(
+                Pair.of(0, 0),
+                Pair.of(2, 1),
+                Pair.of(1, 2)
+            )
+        );
+        assertEquals(expected, underTest.characterToPairsMap('b', 'c'));
     }
 
 }

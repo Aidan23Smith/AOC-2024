@@ -2,8 +2,10 @@ package com.aoc2024.api.model;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,7 +15,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
 import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 @Builder
 @Accessors(fluent = true)
@@ -160,8 +164,8 @@ public class Input {
             .findAny()
             .orElseThrow();
         Input before = new Input(coordinates.stream()
-            .filter(coordinate -> coordinate.y() < missingRow)
-            .collect(Collectors.toSet()));
+                                     .filter(coordinate -> coordinate.y() < missingRow)
+                                     .collect(Collectors.toSet()));
         Input after = new Input(coordinates.stream()
                                     .filter(coordinate -> coordinate.y() > missingRow)
                                     .map(coordinate -> new Coordinate(coordinate.x(), coordinate.y() - missingRow - 1, coordinate.character()))
@@ -178,6 +182,27 @@ public class Input {
             .collect(Collectors.toSet());
     }
 
+    public Map<Character, Set<Pair<Integer, Integer>>> characterToPairsMap() {
+        Set<Character> characters = getRowStrings().stream()
+            .flatMap(row -> row.chars()
+                .mapToObj(c -> (char) c))
+            .collect(Collectors.toSet());
+
+        return characters.stream()
+            .collect(Collectors.toMap(character -> character, this::pairsWithCharacter));
+    }
+
+    public Map<Character, Set<Pair<Integer, Integer>>> characterToPairsMap(char... ignoring) {
+        Set<Character> characters = getRowStrings().stream()
+            .flatMap(row -> row.chars()
+                .mapToObj(c -> (char) c))
+            .filter(character -> !convertToList(ignoring).contains(character))
+            .collect(Collectors.toSet());
+
+        return characters.stream()
+            .collect(Collectors.toMap(character -> character, this::pairsWithCharacter));
+    }
+
     @Override
     public String toString() {
         return sorted().stream()
@@ -188,6 +213,14 @@ public class Input {
                 return String.valueOf(i.character());
             })
             .reduce("", (a, b) -> a + b);
+    }
+
+    private List<Character> convertToList(char... objects) {
+        List<Character> list = new ArrayList<>();
+        for (Character object : objects) {
+            list.add(object);
+        }
+        return list;
     }
 
 }
