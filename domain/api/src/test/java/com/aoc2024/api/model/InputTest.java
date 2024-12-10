@@ -286,4 +286,15 @@ class InputTest {
         assertEquals(expected, underTest.characterToPairsMap('b', 'c'));
     }
 
+    @Test
+    void adjacentCoordinates() {
+        Set<Coordinate> expected = Set.of(
+            new Coordinate(1, 0, 'b'),
+            new Coordinate(0, 1, 'b'),
+            new Coordinate(2, 1, 'a'),
+            new Coordinate(1, 2, 'a')
+        );
+        assertEquals(expected, underTest.adjacentCoordinates(underTest.get(1, 1)));
+    }
+
 }

@@ -203,6 +203,12 @@ public class Input {
             .collect(Collectors.toMap(character -> character, this::pairsWithCharacter));
     }
 
+    public Set<Coordinate> adjacentCoordinates(Coordinate coordinate) {
+        return coordinates.stream()
+            .filter(other -> coordinate.distanceFrom(other) == 1)
+            .collect(Collectors.toSet());
+    }
+
     @Override
     public String toString() {
         return sorted().stream()
