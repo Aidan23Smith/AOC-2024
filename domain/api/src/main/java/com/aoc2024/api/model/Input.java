@@ -192,6 +192,16 @@ public class Input {
             .collect(Collectors.toMap(character -> character, this::pairsWithCharacter));
     }
 
+    public Map<Character, Set<Coordinate>> characterToCoordinateMap() {
+        Set<Character> characters = getRowStrings().stream()
+            .flatMap(row -> row.chars()
+                .mapToObj(c -> (char) c))
+            .collect(Collectors.toSet());
+
+        return characters.stream()
+            .collect(Collectors.toMap(character -> character, this::coordinatesWithCharacter));
+    }
+
     public Map<Character, Set<Pair<Integer, Integer>>> characterToPairsMap(char... ignoring) {
         Set<Character> characters = getRowStrings().stream()
             .flatMap(row -> row.chars()

@@ -275,6 +275,28 @@ class InputTest {
     }
 
     @Test
+    void characterToCoordinateMap() {
+        Map<Character, Set<Coordinate>> expected = Map.of(
+            'a', Set.of(
+                new Coordinate(0, 0, 'a'),
+                new Coordinate(2, 1, 'a'),
+                new Coordinate(1, 2, 'a')
+            ),
+            'b', Set.of(
+                new Coordinate(1, 0, 'b'),
+                new Coordinate(0, 1, 'b'),
+                new Coordinate(2, 2, 'b')
+            ),
+            'c', Set.of(
+                new Coordinate(2, 0, 'c'),
+                new Coordinate(1, 1, 'c'),
+                new Coordinate(0, 2, 'c')
+            )
+        );
+        assertEquals(expected, underTest.characterToCoordinateMap());
+    }
+
+    @Test
     void characterToPairsMap_ignoring() {
         Map<Character, Set<Pair<Integer, Integer>>> expected = Map.of(
             'a', Set.of(
