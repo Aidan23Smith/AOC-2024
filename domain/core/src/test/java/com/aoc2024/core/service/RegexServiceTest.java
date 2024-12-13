@@ -55,4 +55,15 @@ class RegexServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void findPattern_day13() {
+        List<String> expected = List.of("8400", "5400");
+
+        String input = "Prize: X=8400, Y=5400";
+
+        List<String> actual = regexService.findPattern(input, "([0-9]+)");
+
+        assertEquals(expected, actual);
+    }
+
 }

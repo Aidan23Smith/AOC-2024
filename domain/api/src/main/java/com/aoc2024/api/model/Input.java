@@ -131,10 +131,10 @@ public class Input {
     }
 
     public int numberOfRows() {
-        return (int) coordinates.stream()
+        return coordinates.stream()
             .map(Coordinate::y)
-            .distinct()
-            .count();
+            .max(Integer::compareTo)
+            .orElse(0);
     }
 
     public List<Coordinate> sorted() {
