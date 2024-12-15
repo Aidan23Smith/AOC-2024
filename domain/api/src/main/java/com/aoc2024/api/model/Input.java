@@ -48,7 +48,7 @@ public class Input {
     }
 
     public List<String> getRowStrings() {
-        return IntStream.range(0, numberOfRows())
+        return IntStream.range(0, numberOfRows() + 1)
             .mapToObj(this::getRowString)
             .toList();
     }

@@ -66,4 +66,15 @@ class RegexServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void findPattern_day14() {
+        List<String> expected = List.of("0", "4", "3", "-3");
+
+        String input = "p=0,4 v=3,-3";
+
+        List<String> actual = regexService.findPattern(input, "([0-9-]+)");
+
+        assertEquals(expected, actual);
+    }
+
 }

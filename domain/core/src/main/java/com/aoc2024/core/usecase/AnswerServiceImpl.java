@@ -8,6 +8,7 @@ import com.aoc2024.core.day.Day10;
 import com.aoc2024.core.day.Day11;
 import com.aoc2024.core.day.Day12;
 import com.aoc2024.core.day.Day13;
+import com.aoc2024.core.day.Day14;
 import com.aoc2024.core.day.Day2;
 import com.aoc2024.core.day.Day3;
 import com.aoc2024.core.day.Day4;
@@ -39,6 +40,7 @@ public class AnswerServiceImpl implements AnswerService {
     private final Day11 day11;
     private final Day12 day12;
     private final Day13 day13;
+    private final Day14 day14;
 
     @Override
     public String getPt1(AnswerRequest answerRequest) {
@@ -65,6 +67,7 @@ public class AnswerServiceImpl implements AnswerService {
             case 11 -> day11;
             case 12 -> day12;
             case 13 -> day13;
+            case 14 -> day14;
             default -> throw new NotImplementedException();
         };
     }
